@@ -1,0 +1,67 @@
+<nav class="navbar text-center" style="background-color:#f0f0f0;">
+<span class="navbar-brand mb-0 h1 text-center"> <img src ="../assets/images/train-on-railroad.png">Welcome To Indian Railways</span>
+</nav>
+<div class = "container-fluid">
+<div class="row">
+  <div class="col-md-2 col-lg-2">
+  </div>
+  <div class="col-md-8 col-lg-8">
+<div class="card mt-5 ml-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+  <div class="card-body text-center" style="color:#333366;"><h5>Pnr : {{pnrDetails.pnr}}</h5></div>
+  <div class="card-body text-center" style="color:#ff5f5f;">
+    <img src="../assets/images/map-spot1.png" class="text-center">
+    <hr>
+    <h4>Journey Details</h4>
+    <div class="col-md-12" style="color:black;">
+      <div class="row mt-3">
+        <div class="col-md-6" style="padding:0px;">
+        <strong class="mt-5">Train Name</strong> :  {{pnrDetails.train.name}}<br>
+            <strong>From Station</strong> :  {{pnrDetails.from_station.name}} / {{pnrDetails.from_station.code}}<br>
+            <strong>Reservation Upto</strong> :  {{pnrDetails.reservation_upto.name}} / {{pnrDetails.reservation_upto.code}}<br>
+        </div>
+        <div class="col-md-6" style="padding:0px;">
+          <strong>Boarding Date :</strong>   {{pnrDetails.doj}}<br>
+            <strong>Train number</strong> :  {{pnrDetails.train.number}}<br>
+              <strong>To Station</strong> :  {{pnrDetails.to_station.name}} / {{pnrDetails.to_station.code}}<br>
+              <strong>Boarding Point</strong> :  {{pnrDetails.boarding_point.name}} / {{pnrDetails.boarding_point.code}}<br>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="col-md-12" style="color:black;" *ngFor="let pnrDetails of pnrDetails.passengers">
+      <div class="row mt-3" >
+        <div class="col-md-4">
+        <strong class="mt-5">Serial No.</strong> :  {{pnrDetails.no}}<br>
+        </div>
+        <div class="col-md-4">
+          <strong>Booking Status :</strong>   {{pnrDetails.booking_status}}<br>
+
+        </div>
+        <div class="col-md-4">
+          <strong>Current Status :</strong>   {{pnrDetails.current_status}}<br>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="col-md-12" style="color:black;">
+      <div class="row mt-3" >
+        <div class="col-md-6">
+        <strong class="mt-5">Total passengers : </strong>{{pnrDetails.total_passengers}}<br>
+        </div>
+        <div class="col-md-6">
+          <strong >Chart Prepared : </strong><div *ngIf="pnrDetails.chart_prepared; then login else logout"></div>
+          <ng-template #login>YES</ng-template>
+          <ng-template #logout>NO</ng-template>
+
+          <br>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="col-md-2 col-lg-2">
+</div>
+</div>
+</div>
