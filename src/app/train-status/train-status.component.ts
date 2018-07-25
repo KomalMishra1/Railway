@@ -13,6 +13,9 @@ public station:any;
 public trainStatusDetails : any;
 public routeObj : any;
 public nextStoppage :any;
+public showNextStoppageStation:boolean = false;
+
+
   constructor(private _router : Router , private _appService : AppService) {
 
   this.station =  this._appService.station;
@@ -25,10 +28,18 @@ public nextStoppage :any;
         {
           // console.log(value.station.name);
            this.routeObj = value;
-           console.log(this.nextStoppage);
+           // console.log(this.nextStoppage);
           console.log(this.routeObj);
+          if(value.schdep == 'Destination' || value.scharr == 'Source') {
+            this.showNextStoppageStation = false;
+            console.log("departure" , value.schdep);
+            console.log("arrival" , value.scharr)
+          }
+          else {
             var num : number = this.trainStatusDetails.route.indexOf(value);
             this.nextStoppage = this.trainStatusDetails.route[num+1];
+            this.showNextStoppageStation = true;
+          }
         }
       }
   }

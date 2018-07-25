@@ -87,11 +87,22 @@ A new web page will be opened with more detailed information about your queried 
                           <div class="form-group">
                          <label for="exampleFormControlSelect1">Select Journey Station</label>
                          <select class="form-control" id="exampleFormControlSelect1" (change)="pushData($event.target.value);" required>
+                           <option>SELECT</option>
                            <option *ngFor="let select of trainDetails.route" [value]="select.station.name">
                              {{select.station.name}}  <strong><p>{{select.station.code}}</p></strong>
                            </option>
                          </select>
                        </div>
+                       <!-- <div class="form-group">
+                      <label for="exampleFormControlSelect1"> Journey Date</label>
+                      <select class="form-control" id="exampleFormControlSelect1" (change)="pushData($event.target.value);" required>
+                        <option>SELECT</option>
+                        <option *ngFor="let select of trainDetails.route" [value]="select.station.name">
+                          {{select.station.name}}  <strong><p>{{select.station.code}}</p></strong>
+                        </option>
+                      </select>
+                    </div> -->
+
           </div>
           </div>
           </form>

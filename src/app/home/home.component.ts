@@ -23,7 +23,10 @@ trainSpotform : FormGroup=new FormGroup({
 trainDetails:any;
 trainToBeChecked:any;
 event:any;
+public now: Date = new Date();
+
   constructor(private _router : Router , private _appService : AppService) {
+
 
  }
 
@@ -33,6 +36,8 @@ event:any;
 ngOnChanges(){
   console.log(this.trainSpotform.value.trainNumber);
 }
+
+
 
       sendPnr() {
         if(!(this.pnrform.valid)) {

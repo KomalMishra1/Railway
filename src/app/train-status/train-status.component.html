@@ -25,16 +25,19 @@
           </tr>
           <tr>
             <th>Scheduled Arrival</th>
-            <td *ngIf="routeObj.schdep === 'Source' ; then thenblock else elseblock">
+            <td>
+              <div *ngIf="routeObj.scharr === 'Source' ; then thenBlock else elseBlock"></div>
               <ng-template #thenBlock> {{routeObj.scharr}}</ng-template>
               <ng-template #elseBlock>  {{routeObj.scharr_date}} {{routeObj.scharr}}</ng-template>
+
             </td>
           </tr>
           <tr>
             <th>Scheduled Departure</th>
-            <td *ngIf="routeObj.schdep == 'Destination' ; then thenblock else elseblock">
-              <ng-template #thenBlock> {{routeObj.schdep}}</ng-template>
-              <ng-template #elseBlock>{{routeObj.scharr_date}} {{routeObj.schdep}}</ng-template></td>
+            <td>
+              <div *ngIf="routeObj.schdep == 'Destination' ; then gotoDate else gotoDestination"></div>
+              <ng-template #gotoDate> {{routeObj.schdep}}</ng-template>
+              <ng-template #gotoDestination>{{routeObj.scharr_date}} {{routeObj.schdep}}</ng-template></td>
           </tr>
           <tr>
             <th>Expected Arrival</th>
@@ -56,7 +59,7 @@
             <th>Distance from source</th>
             <td>{{routeObj.distance}}</td>
           </tr>
-          <tr>
+          <tr *ngIf="showNextStoppageStation">
             <th>Next Stoppage Station</th>
             <td>{{nextStoppage.station.name}}</td>
           </tr>
