@@ -22,7 +22,7 @@ trainSpotform : FormGroup=new FormGroup({
 
 trainDetails:any;
 trainToBeChecked:any;
-
+event:any;
   constructor(private _router : Router , private _appService : AppService) {
 
  }
@@ -77,8 +77,12 @@ enter(event) {
 }
 
 pushData(event) {
-    this._appService.sendToLiveStatus(this.trainDetails , event);
-    this._router.navigate(['/trainstatus']);
+  this.event=event
     }
+
+moveToTrainStatus(){
+    this._appService.sendToLiveStatus(this.trainDetails , this.event);
+  this._router.navigate(['/trainstatus']);
+}
 
 }

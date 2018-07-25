@@ -25,15 +25,40 @@
           </tr>
           <tr>
             <th>Scheduled Arrival</th>
-            <td>{{routeObj.scharr_date}} {{routeObj.scharr}}</td>
+            <td *ngIf="routeObj.schdep === 'Source' ; then thenblock else elseblock">
+              <ng-template #thenBlock> {{routeObj.scharr}}</ng-template>
+              <ng-template #elseBlock>  {{routeObj.scharr_date}} {{routeObj.scharr}}</ng-template>
+            </td>
           </tr>
           <tr>
             <th>Scheduled Departure</th>
-            <td>{{routeObj.scharr_date}} {{routeObj.schdep}}</td>
+            <td *ngIf="routeObj.schdep == 'Destination' ; then thenblock else elseblock">
+              <ng-template #thenBlock> {{routeObj.schdep}}</ng-template>
+              <ng-template #elseBlock>{{routeObj.scharr_date}} {{routeObj.schdep}}</ng-template></td>
           </tr>
           <tr>
-            <th>Scheduled Departure</th>
-            <td>{{routeObj.scharr_date}} {{routeObj.schdep}}</td>
+            <th>Expected Arrival</th>
+            <td>{{routeObj.actarr_date}} {{routeObj.actarr}}</td>
+          </tr>
+          <tr>
+            <th>Expected Departure</th>
+            <td>{{routeObj.actarr_date}} {{routeObj.actdep}}</td>
+          </tr>
+          <tr>
+            <th>Delay</th>
+            <td>{{routeObj.status}}</td>
+          </tr>
+          <tr>
+            <th>Last Location</th>
+            <td>{{trainStatusDetails.position}}</td>
+          </tr>
+          <tr>
+            <th>Distance from source</th>
+            <td>{{routeObj.distance}}</td>
+          </tr>
+          <tr>
+            <th>Next Stoppage Station</th>
+            <td>{{nextStoppage.station.name}}</td>
           </tr>
         </tbody>
       </table>
