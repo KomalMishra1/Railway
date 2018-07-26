@@ -88,20 +88,23 @@ A new web page will be opened with more detailed information about your queried 
                          <label for="exampleFormControlSelect1">Select Journey Station</label>
                          <select class="form-control" id="exampleFormControlSelect1" (change)="pushData($event.target.value);" required>
                            <option>SELECT</option>
-                           <option *ngFor="let select of trainDetails.route" [value]="select.station.name">
+                           <option *ngFor="let select of trainStation.route" [value]="select.station.name">
                              {{select.station.name}}  <strong><p>{{select.station.code}}</p></strong>
                            </option>
                          </select>
                        </div>
-                       <!-- <div class="form-group">
+                       <div class="form-group">
                       <label for="exampleFormControlSelect1"> Journey Date</label>
-                      <select class="form-control" id="exampleFormControlSelect1" (change)="pushData($event.target.value);" required>
-                        <option>SELECT</option>
-                        <option *ngFor="let select of trainDetails.route" [value]="select.station.name">
+                      <select class="form-control" id="exampleFormControlSelect1" (change)="pushDate($event.target.value);" required>
+                        <option>Select</option>
+                        <option>Today</option>
+                        <option>Tomorrow</option>
+                        <option>Yesterday</option>
+                        <!-- <option *ngFor="let select of trainDetails.route" [value]="select.station.name">
                           {{select.station.name}}  <strong><p>{{select.station.code}}</p></strong>
-                        </option>
+                        </option> -->
                       </select>
-                    </div> -->
+                    </div>
 
           </div>
           </div>
@@ -109,7 +112,7 @@ A new web page will be opened with more detailed information about your queried 
         </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="moveToTrainStatus();" [disabled]="trainSpotform.invalid" >Check</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="SpotTrainStatus();" [disabled]="trainSpotform.invalid" >Check</button>
           </div>
         </div>
       </div>

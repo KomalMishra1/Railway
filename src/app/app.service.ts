@@ -9,20 +9,26 @@ import {Observable} from 'rxjs';
 
 export class AppService {
 
-key:any = "cbfl3fk6i6";
+key:any = "poxqzh6nqn";
 urlpnr : any ="https://api.railwayapi.com/v2/pnr-status/pnr";
 urlTrainStatus:any="https://api.railwayapi.com/v2/live/train";
+public trainRouteUrl:any='https://api.railwayapi.com/v2/route/train';
 
 public now: Date = new Date();
 date:String;
-public trainStatusDetails:any;
+public trainNo:any;
 public station : any
+public journeyDate : Date = new Date();
 
 constructor(private _http : HttpClient) {}
 
-sendToLiveStatus(data , station){
-  this.trainStatusDetails=data;
+spotTrainStatus(trainNo , station , date1){
+  this.trainNo=trainNo;
   this.station=station;
+  this.journeyDate.setDate(date1.getDate());
+  console.log(this.trainNo);
+  console.log(this.station);
+  console.log(this.journeyDate);
 }
 
 sendPnr(body : any) {
@@ -33,9 +39,21 @@ sendPnr(body : any) {
 }
 
 
-getTrainStatus(body : any) {
-  this.date = this.now.getDate()+"-"+(this.now.getMonth()+1)+"-"+this.now.getFullYear();
-  return this._http.get(this.urlTrainStatus+'/'+body+'/date/'+this.date+'/apikey/'+this.key+'/', {
+getTrainStations(body : any) {
+  // this.date = this.now.getDate()+"-"+(this.now.getMonth()+1)+"-"+this.now.getFullYear();
+  // return this._http.get(this.urlTrainStatus+'/'+body+'/date/'+this.date+'/apikey/'+this.key+'/', {
+  //    responseType : 'json',
+  //   headers:new HttpHeaders().append('Content-Type' , 'application/json')
+  // });
+  return this._http.get(this.trainRouteUrl+'/'+body+'/apikey/'+this.key+'/', {
+     responseType : 'json',
+    headers:new HttpHeaders().append('Content-Type' , 'application/json')
+});
+}
+
+getStatusDetails() {
+  this.date = this.journeyDate.getDate()+"-"+(this.journeyDate.getMonth()+1)+"-"+this.journeyDate.getFullYear();
+  return this._http.get(this.urlTrainStatus+'/'+this.trainNo+'/date/'+this.date+'/apikey/'+this.key+'/', {
      responseType : 'json',
     headers:new HttpHeaders().append('Content-Type' , 'application/json')
   });

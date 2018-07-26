@@ -21,12 +21,16 @@ trainSpotform : FormGroup=new FormGroup({
 });
 
 trainDetails:any;
+trainStation: any;
 trainToBeChecked:any;
 event:any;
-public now: Date = new Date();
+trainNo : any;
+public date: Date = new Date();
 
   constructor(private _router : Router , private _appService : AppService) {
-
+    // this.date = new Date();
+    //  this.date.setDate( this.date.getDate() + 3 );
+    //  console.log(this.date);
 
  }
 
@@ -68,25 +72,57 @@ onSubmitTrainNo(){
 enter(event) {
   if(event.target.value.length == 5)
   {
-    console.log(typeof parseInt(event.target.value));
-    this._appService.getTrainStatus(parseInt(event.target.value)).
+    this.trainNo = event.target.value;
+    console.log(parseInt(event.target.value));
+    this._appService.getTrainStations(parseInt(event.target.value)).
     subscribe(
       data=> {
-        this.trainDetails=data;
-        console.log(this.trainDetails.route);
-          console.log(data);},
-       err=>console.log(err));
+        // this.trainDetails=data;
+        // console.log(this.trainDetails.route);
+        //   console.log(data);
+        console.log(data);
+        this.trainStation = data;
+        console.log(this.trainStation.route)
+      },
+       error=>console.log(error));
      }
-  console.log("value is",typeof parseInt(event.target.value));
-  console.log("length is" , event.target.value.length);
+  // console.log("value is",typeof parseInt(event.target.value));
+  // console.log("length is" , event.target.value.length);
 }
 
 pushData(event) {
   this.event=event
+  console.log(event);
     }
 
-moveToTrainStatus(){
-    this._appService.sendToLiveStatus(this.trainDetails , this.event);
+    pushDate(event) {
+      if(event == "Tomorrow") {
+
+        var date1 : Date =new Date();
+        date1.setDate(date1.getDate() + 1 );
+
+        this.date.setDate(date1.getDate());
+        console.log("tomorrow selected" , this.date);
+        return date1;
+      }
+      else if(event == "Yesterday") {
+        var date2 : Date =new Date();
+          date2.setDate( date2.getDate() - 1 );
+          this.date.setDate(date2.getDate());
+        console.log("yesterday selected" , this.date);
+        return date2;
+      }
+      else{
+        var date3 : Date =new Date();
+        this.date.setDate(date3.getDate());
+      console.log(this.date);
+      return this.date;
+    }
+
+    }
+
+SpotTrainStatus(){
+    this._appService.spotTrainStatus(this.trainNo , this.event , this.date);
   this._router.navigate(['/trainstatus']);
 }
 
