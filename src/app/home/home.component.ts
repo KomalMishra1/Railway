@@ -20,6 +20,10 @@ trainSpotform : FormGroup=new FormGroup({
       trainNumber: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)]),
 });
 
+trainSchedule : FormGroup=new FormGroup({
+      trainNo: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)]),
+});
+
 trainDetails:any;
 trainStation: any;
 trainToBeChecked:any;
@@ -67,6 +71,11 @@ ngOnChanges(){
 onSubmitTrainNo(){
   console.log(this.trainSpotform)
   this.trainSpotform.controls['trainNumber'].markAsTouched()
+}
+
+onSubmitTrainNo1(){
+  console.log(this.trainSchedule)
+  this.trainSchedule.controls['trainNo'].markAsTouched()
 }
 
 enter(event) {
@@ -126,4 +135,13 @@ SpotTrainStatus(){
   this._router.navigate(['/trainstatus']);
 }
 
+sendTrainNo() {
+  if(!(this.trainSchedule.valid)) {
+    console.log('invalid'); return;
+
+  }
+      console.log(JSON.stringify( typeof this.trainSchedule.value.trainNo));
+      var num : number = parseInt(this.trainSchedule.value.trainNo);
+  this._router.navigate(['/trainschedule' , num]);
+}
 }

@@ -14,7 +14,7 @@ public trainStatusDetails : any;
 public routeObj : any;
 public nextStoppage :any;
 public showNextStoppageStation:boolean = false;
-
+public routeArr : any = [];
 
   constructor(private _router : Router , private _appService : AppService) {
 
@@ -25,25 +25,33 @@ this._appService.getStatusDetails().
 subscribe(
   data => {console.log(data);
     this.trainStatusDetails = data;
+      this.showRouteInformation(this.trainStatusDetails.route);
     console.log("train  status" ,  this.trainStatusDetails.route);
   },
   err=>console.log(err));
   // console.log("route is " , this.trainStatusDetails.route);
   console.log("station is at" , this.station);
-    // console.log("station is at route" , this.trainStatusDetails.route);
+        // console.log("station is at route" , this.trainStatusDetails.route);
+        // this.routeArr=this.trainStatusDetails.route;
+        // console.log(this.routeArr);
 
 
 
   }
 
   ngOnInit() {
-    for(let value of this.trainStatusDetails.route){
+
+  }
+
+  showRouteInformation(trainStatus){
+    for(let value of trainStatus){
       console.log(value);
       if(value.station.name == this.station)
       {
-        // console.log(value.station.name);
+         console.log(value.station.name);
          this.routeObj = value;
-         // console.log(this.nextStoppage);
+         console.log("route object" , this.routeObj)
+         console.log(this.nextStoppage);
         console.log("this is route object" , this.routeObj);
         if(value.schdep == 'Destination' || value.scharr == 'Source') {
           this.showNextStoppageStation = false;
@@ -58,8 +66,5 @@ subscribe(
       }
     }
   }
-
-
-
 
 }

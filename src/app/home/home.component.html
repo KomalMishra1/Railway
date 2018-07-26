@@ -120,5 +120,51 @@ A new web page will be opened with more detailed information about your queried 
 
     </div>
 </div>
+<div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:104px;">
+  <div class="card-body text-center" style="color:#333366;"><h4>Train Schedule</h4></div>
+  <div class="card-body text-center" style="color:#ff5f5f;">
+    <img src="../assets/images/clock-circular-outline.png" class="text-center">
+    <hr>
+    <p>Please enter few characters of Train Name OR few digits of Train Number.
+e.g. To get the train schedule for Himachal Express i.e. Train No. 14553 -- either enter himachal or 145
+    </p>
+
+<!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" style="color:#333366; border-color:#333366;" data-toggle="modal" data-target="#exampleModalCenter2"><strong>Check</strong></button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Check Train Schedule</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="needs-validation" novalidate [formGroup]="trainSchedule" (ngSubmit)="onSubmitTrainNo1()">
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <div class="form-group">
+                <label for="validationTooltip02">Enter Train Number</label>
+                <input type="text" formControlName="trainNo" class="form-control" id="validationTooltip02" placeholder="Train No." placeholder="12345" required>
+                <span *ngIf="!trainSchedule.get('trainNo').valid && trainSchedule.get('trainNo').touched && trainSchedule.get('trainNo').dirty && trainSchedule.get('trainNo').touched"
+                           class="help-block"> Please Enter Train number of 5 digits</span>
+                          </div>
+          </div>
+          </div>
+          </form>
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+            <button type="button" class="btn btn-primary" (click)="sendTrainNo();" [disabled]="!trainSchedule.invalid" data-dismiss="modal">Check</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+</div>
 </div>
 </div>
