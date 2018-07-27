@@ -11,13 +11,15 @@ import {ROUTING} from './app.routing';
 import { PnrComponent } from './pnr/pnr.component';
 import {AppService} from './app.service';
 import { TrainStatusComponent } from './train-status/train-status.component';
+import { TrainscheduleComponent } from './trainschedule/trainschedule.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PnrComponent,
-    TrainStatusComponent
+    TrainStatusComponent,
+    TrainscheduleComponent
   ],
   imports: [
     BrowserModule,

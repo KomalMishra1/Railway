@@ -8,7 +8,7 @@ import {TrainStatusComponent} from './train-status/train-status.component';
 export const AppRoutes : Routes =[
   {path : '' , component : HomeComponent},
    {path: 'pnr/:id', component: PnrComponent},
-   {path: 'trainstatus', component: TrainStatusComponent}
+   {path: 'trainstatus/:id', component: TrainStatusComponent}
 
 
 

@@ -13,15 +13,15 @@ import {AppService} from '../app.service';
 export class HomeComponent implements OnInit {
 
   pnrform : FormGroup=new FormGroup({
-        pnrNumber: new FormControl(null ,  [Validators.required,Validators.minLength(10) , Validators.maxLength(10)]),
+        pnrNumber: new FormControl(null ,  [Validators.required,Validators.minLength(10) , Validators.maxLength(10)])
 });
 
 trainSpotform : FormGroup=new FormGroup({
-      trainNumber: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)]),
+      trainNumber: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)])
 });
 
-trainSchedule : FormGroup=new FormGroup({
-      trainNo: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)]),
+trainScheduleForm : FormGroup=new FormGroup({
+      trainNumber1: new FormControl(null , Validators.required)
 });
 
 trainDetails:any;
@@ -52,7 +52,7 @@ ngOnChanges(){
           console.log('invalid'); return;
 
         }
-
+            console.log(this.pnrform.value.pnrNumber);
             console.log(JSON.stringify( typeof this.pnrform.value.pnrNumber));
             var num : number = parseInt(this.pnrform.value.pnrNumber);
             // console.log(typeof num);
@@ -74,8 +74,8 @@ onSubmitTrainNo(){
 }
 
 onSubmitTrainNo1(){
-  console.log(this.trainSchedule)
-  this.trainSchedule.controls['trainNo'].markAsTouched()
+  console.log(this.trainScheduleForm)
+  this.trainScheduleForm.controls['trainNumber1'].markAsTouched()
 }
 
 enter(event) {
@@ -136,12 +136,17 @@ SpotTrainStatus(){
 }
 
 sendTrainNo() {
-  if(!(this.trainSchedule.valid)) {
-    console.log('invalid'); return;
+  // if(!(this.trainSchedule.valid)) {
+  //   console.log('invalid'); return;
+  //
+  // }
 
-  }
-      console.log(JSON.stringify( typeof this.trainSchedule.value.trainNo));
-      var num : number = parseInt(this.trainSchedule.value.trainNo);
-  this._router.navigate(['/trainschedule' , num]);
+      console.log(this.trainScheduleForm.value);
+      // var num : number = parseInt((this.trainScheduleForm.value.trainNo));
+      // console.log(num);
+  // this._router.navigate(['/trainschedule' , num]);
+}
+sendTrain() {
+  console.log(this.trainScheduleForm.value);
 }
 }

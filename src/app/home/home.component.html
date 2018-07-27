@@ -133,7 +133,7 @@ e.g. To get the train schedule for Himachal Express i.e. Train No. 14553 -- eith
     <button type="button" class="btn btn-primary" style="color:#333366; border-color:#333366;" data-toggle="modal" data-target="#exampleModalCenter2"><strong>Check</strong></button>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -143,27 +143,26 @@ e.g. To get the train schedule for Himachal Express i.e. Train No. 14553 -- eith
             </button>
           </div>
           <div class="modal-body">
-            <form class="needs-validation" novalidate [formGroup]="trainSchedule" (ngSubmit)="onSubmitTrainNo1()">
+            <form  [formGroup]="trainScheduleForm" (ngSubmit)="onSubmitTrainNo1();">
             <div class="form-row">
               <div class="col-md-12 mb-3">
                 <div class="form-group">
-                <label for="validationTooltip02">Enter Train Number</label>
-                <input type="text" formControlName="trainNo" class="form-control" id="validationTooltip02" placeholder="Train No." placeholder="12345" required>
-                <span *ngIf="!trainSchedule.get('trainNo').valid && trainSchedule.get('trainNo').touched && trainSchedule.get('trainNo').dirty && trainSchedule.get('trainNo').touched"
+                <label for="validationTooltip">Enter Train Number</label>
+                <input type="text" class="form-control"  formControlName = "trainNumber1"  id="validationTooltip" placeholder="Train No." placeholder="12345" required>
+                <span *ngIf="!trainScheduleForm.get('trainNumber1').valid && trainScheduleForm.get('trainNumber1').touched && trainScheduleForm.get('trainNumber1').dirty && trainScheduleForm.get('trainNumber1').touched"
                            class="help-block"> Please Enter Train number of 5 digits</span>
                           </div>
           </div>
           </div>
           </form>
-        </div>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-            <button type="button" class="btn btn-primary" (click)="sendTrainNo();" [disabled]="!trainSchedule.invalid" data-dismiss="modal">Check</button>
+            <button type="button" class="btn btn-primary" (click)="sendTrain();" [disabled]="!trainScheduleForm.invalid" data-dismiss="modal">Check</button>
           </div>
         </div>
       </div>
     </div>
-
     </div>
 </div>
 </div>
