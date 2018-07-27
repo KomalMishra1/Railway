@@ -34,8 +34,7 @@ subscribe(
         // console.log("station is at route" , this.trainStatusDetails.route);
         // this.routeArr=this.trainStatusDetails.route;
         // console.log(this.routeArr);
-
-
+console.log("Hitesh");
 
   }
 
