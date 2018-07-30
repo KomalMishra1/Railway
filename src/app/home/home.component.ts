@@ -20,6 +20,10 @@ trainSpotform : FormGroup=new FormGroup({
       trainNumber: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)])
 });
 
+trainBetweenStationForm : FormGroup=new FormGroup({
+      sourceStation: new FormControl(null ,  Validators.required),
+        destinationStation: new FormControl(null , Validators.required)
+});
 
 trainForm : FormGroup=new FormGroup({
       train: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)])
@@ -31,12 +35,19 @@ trainStation: any;
 trainToBeChecked:any;
 event:any;
 trainNo : any;
+sourceArr : any;
+destinationArr : any;
+
 public date: Date = new Date();
 
   constructor(private _router : Router , private _appService : AppService) {
-    // this.date = new Date();
-    //  this.date.setDate( this.date.getDate() + 3 );
-    //  console.log(this.date);
+  this._appService.getStationCode()
+  .subscribe(
+    data => {console.log(data);
+      this.sourceArr = data;
+      console.log("train  status" ,  this.sourceArr);
+    },
+    err=>console.log(err));
 
  }
 
@@ -76,9 +87,18 @@ ngOnChanges(){
             console.log(JSON.stringify( typeof this.trainForm.value.train));
             var num : number = parseInt(this.trainForm.value.train);
                 this._router.navigate(['/trainschedule',num] );
-
-
       }
+
+      searchTrainBetweenStation() {
+        if(!(this.trainBetweenStationForm.valid)) {
+          console.log('invalid'); return;
+
+        }
+            console.log(this.trainBetweenStationForm.value);
+      }
+
+
+
       onSubmit() {
     console.log(this.pnrform)
     this.pnrform.controls['pnrNumber'].markAsTouched()
@@ -87,7 +107,11 @@ onSubmitTrain() {
 console.log(this.trainForm)
 this.trainForm.controls['train'].markAsTouched()
 }
-
+onSubmitTrainStation(){
+  console.log(this.trainBetweenStationForm)
+  this.trainBetweenStationForm.controls['sourceStation'].markAsTouched(),
+    this.trainBetweenStationForm.controls['destinationStation'].markAsTouched()
+}
 
 enter(event) {
   if(event.target.value.length == 5)
@@ -109,6 +133,12 @@ enter(event) {
   // console.log("value is",typeof parseInt(event.target.value));
   // console.log("length is" , event.target.value.length);
 }
+
+checkForCode(event) {
+  console.log(event.target.value);
+
+}
+
 
 pushData(event) {
   this.event=event

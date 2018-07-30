@@ -59,5 +59,10 @@ getStatusDetails() {
   });
 }
 
-
+// getStationCode() {
+//   return this._http.get(this.trainRouteUrl+'/'+body+'/apikey/'+this.key+'/', {
+//      responseType : 'json',
+//     headers:new HttpHeaders().append('Content-Type' , 'application/json')
+// });
+// }
 }

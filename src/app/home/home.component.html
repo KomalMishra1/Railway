@@ -96,7 +96,62 @@ e.g. To get the train schedule for Himachal Express i.e. Train No. 14553 -- eith
 
     </div>
 </div>
-<div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:104px;">
+<div class="card mt-5 ml-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;">
+  <div class="card-body text-center" style="color:#333366;"><h4>Train Between Stations</h4></div>
+  <div class="card-body text-center" style="color:#ff5f5f;">
+    <img src="../assets/images/distance-to-travel-between-two-points.png" class="text-center">
+    <hr>
+    <p>
+Enter names of two stations and hit Get Trains Between button. Select the right search result and navigate to the page that lists trains between stations
+    </p>
+
+<!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" style="color:#333366; border-color:#333366;" data-toggle="modal" data-target="#exampleModalCenter3"><strong>Check</strong></button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Check train Between Stations </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="needs-validation" novalidate [formGroup]="trainBetweenStationForm" (ngSubmit)="onSubmitTrainStation()">
+            <div class="form-row">
+              <div class="col-md-12 mb-3">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Select Journey Station</label>
+                  <select class="form-control" id="exampleFormControlSelect1" formControlName="sourceStation" required>
+                    <option>SELECT</option>
+                    <option *ngFor="let select of trainStation.route" [value]="select.station.name">
+                      {{select.station.name}}  <strong><p>{{select.station.code}}</p></strong>
+                    </option>
+                  </select>
+                          </div>
+                            <div class="form-group">
+                            <label for="validationTooltip01">Enter Destination Station</label>
+                            <input type="text" formControlName="destinationStation" class="form-control" id="validationTooltip01" placeholder="Enter destination Station" required>
+                            <span *ngIf="!trainBetweenStationForm.get('destinationStation').valid && trainBetweenStationForm.get('destinationStation').touched && trainBetweenStationForm.get('destinationStation').dirty && trainBetweenStationForm.get('destinationStation').touched"
+                                       class="help-block"> Please Enter valid Destination</span>
+                                      </div>
+          </div>
+          </div>
+          </form>
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+            <button type="button" class="btn btn-primary" (click)="searchTrainBetweenStation();" [disabled]="trainBetweenStationForm.invalid" data-dismiss="modal">Search Trains</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+</div>
+<div class="card mt-5 ml-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;">
   <div class="card-body text-center" style="color:#333366;"><h4>Spot Your Train</h4></div>
   <div class="card-body text-center" style="color:#ff5f5f;">
     <img src="../assets/images/magnifier.png" class="text-center">
