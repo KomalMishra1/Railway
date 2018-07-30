@@ -20,9 +20,11 @@ trainSpotform : FormGroup=new FormGroup({
       trainNumber: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)])
 });
 
-trainScheduleForm : FormGroup=new FormGroup({
-      trainNumber1: new FormControl(null , Validators.required)
+
+trainForm : FormGroup=new FormGroup({
+      train: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)])
 });
+
 
 trainDetails:any;
 trainStation: any;
@@ -64,19 +66,28 @@ ngOnChanges(){
 
 
       }
+
+      sendTrain() {
+        if(!(this.trainForm.valid)) {
+          console.log('invalid'); return;
+
+        }
+            console.log(this.trainForm.value.train);
+            console.log(JSON.stringify( typeof this.trainForm.value.train));
+            var num : number = parseInt(this.trainForm.value.train);
+                this._router.navigate(['/trainschedule',num] );
+
+
+      }
       onSubmit() {
     console.log(this.pnrform)
     this.pnrform.controls['pnrNumber'].markAsTouched()
 }
-onSubmitTrainNo(){
-  console.log(this.trainSpotform)
-  this.trainSpotform.controls['trainNumber'].markAsTouched()
+onSubmitTrain() {
+console.log(this.trainForm)
+this.trainForm.controls['train'].markAsTouched()
 }
 
-onSubmitTrainNo1(){
-  console.log(this.trainScheduleForm)
-  this.trainScheduleForm.controls['trainNumber1'].markAsTouched()
-}
 
 enter(event) {
   if(event.target.value.length == 5)
@@ -135,18 +146,5 @@ SpotTrainStatus(){
   this._router.navigate(['/trainstatus']);
 }
 
-sendTrainNo() {
-  // if(!(this.trainSchedule.valid)) {
-  //   console.log('invalid'); return;
-  //
-  // }
 
-      console.log(this.trainScheduleForm.value);
-      // var num : number = parseInt((this.trainScheduleForm.value.trainNo));
-      // console.log(num);
-  // this._router.navigate(['/trainschedule' , num]);
-}
-sendTrain() {
-  console.log(this.trainScheduleForm.value);
-}
 }
