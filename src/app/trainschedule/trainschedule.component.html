@@ -7,7 +7,7 @@
   </div>
   <div class="col-md-8 col-lg-8">
 <div class="card mt-5 ml-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
-  <div class="card-body text-center" style="color:#333366;"><h5>Train Name : {{trainScheduledDetails.train.name}} - {{trainStatusDetails.train.number}} Running Schedule</h5></div>
+  <div class="card-body text-center" style="color:#333366;"><h5>Train Name : {{trainScheduledDetails.train.name}} {{trainScheduledDetails.train.number}} Running Schedule</h5></div>
   <div class="card-body text-center" style="color:#ff5f5f;">
     <img src="../assets/images/magnifier.png" class="text-center">
     <hr>
@@ -26,15 +26,20 @@
           <tr *ngFor = "let details of trainScheduledDetails.route; let i=index" >
             <td>{{i+1}}</td>
             <td>{{details.station.name}} {{details.station.code}} <br>
-            Day : {{details.day}}
-              <!-- <div  *ngIf = "showFull; then showDaily else showDays"> -->
-                <!-- <ng-template #showDaily> Daily</ng-template>
+            Day : {{details.day}}<br>
+            <div class="row">
+              <div class="col-12">
+               <div  *ngIf = "showFull; then showDays else showDaily"> </div>
                 <ng-template #showDays>
-                  <div *ngFor = "let days of runningDays">
-                    {{days.runs}}
+                   <div *ngFor = "let days of runningDays">
+                     <div *ngIf="days.runs == 'Y'">
+                    {{days.code}}
                   </div>
+                </div>
                 </ng-template>
-              </div> -->
+                <ng-template #showDaily>Daily</ng-template>
+              </div>
+              </div>
           </td>
             <td>{{details.scharr}} <br> {{details.schdep}}</td>
             <td>{{details.distance}}</td>

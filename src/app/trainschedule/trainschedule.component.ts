@@ -23,11 +23,12 @@ showFull : boolean = false;
   .subscribe(
   data=> {
     this.trainScheduledDetails=data;
-    console.log(this.trainScheduledDetails);
-    // this.runningDays = this.trainScheduledDetails.days;
-    // console.log(this.runningDays);
-    // this.getDays(this.runningDays);
-      console.log(data);},
+    console.log(this.trainScheduledDetails.train.name);
+     this.runningDays = this.trainScheduledDetails.train.days;
+    console.log(this.runningDays);
+      this.getDays(this.runningDays);
+      // console.log(data);
+    },
    err=>console.log(err));
 
         });
@@ -41,16 +42,20 @@ showFull : boolean = false;
 getDays(days){
 
 for(let day of days) {
+  console.log("daayis " , day);
 if(day.runs == 'Y') {
   this.count=this.count+1;
+  console.log(this.count);
 }
 }
 if(this.count == 7)
 {
   this.showFull=false
+  console.log("inside if");
 }
 else {
   this.showFull = true;
+  console.log("inside else");
 }
 }
 
