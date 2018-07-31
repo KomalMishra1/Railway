@@ -4,6 +4,10 @@ import {FormGroup , FormControl , Validators , ReactiveFormsModule,
   NG_VALIDATORS,  FormsModule , ValidatorFn,FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AppService} from '../app.service';
+import { debounceTime } from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-home',
@@ -28,7 +32,8 @@ trainBetweenStationForm : FormGroup=new FormGroup({
 trainForm : FormGroup=new FormGroup({
       train: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)])
 });
-
+  myControl : FormControl = new FormControl();
+    searchResult :any = [];
 
 trainDetails:any;
 trainStation: any;
@@ -37,27 +42,51 @@ event:any;
 trainNo : any;
 sourceArr : any;
 destinationArr : any;
-
+options = [
+    'One',
+    'Two',
+    'Three'
+   ];
+ filteredOptions: Observable<string[]>;
 public date: Date = new Date();
 
   constructor(private _router : Router , private _appService : AppService) {
-  this._appService.getStationCode()
-  .subscribe(
-    data => {console.log(data);
-      this.sourceArr = data;
-      console.log("train  status" ,  this.sourceArr);
-    },
-    err=>console.log(err));
+  // this._appService.getStationCode()
+  // .subscribe(
+  //   data => {console.log(data);
+  //     this.sourceArr = data;
+  //     console.log("train  status" ,  this.sourceArr);
+  //   },
+  //   err=>console.log(err));
+  // this.searchTerm.valueChanges
+  //   .pipe(debounceTime(400))
+  //   .subscribe(data => {
+  //     console.log(data);
+  //       this._appService.search_word(data).subscribe(   data => {console.log(data);
+  //           this.searchResult = data;
+  //           console.log("train  status" ,  this.searchResult);
+  //         },
+  //         err=>console.log(err));
+  //       });
 
  }
 
   ngOnInit() {
-      console.log(this.trainSpotform.value.trainNumber);
+    this.filteredOptions = this.myControl.valueChanges
+  .pipe(
+    startWith(''),
+    map(value => this._filter(value))
+  );
   }
+
 ngOnChanges(){
   console.log(this.trainSpotform.value.trainNumber);
 }
+private _filter(value: string): string[] {
+  const filterValue = value.toLowerCase();
 
+  return this.options.filter(option => option.toLowerCase().includes(filterValue));
+}
 
 
       sendPnr() {

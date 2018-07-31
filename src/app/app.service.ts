@@ -13,6 +13,7 @@ key:any = "poxqzh6nqn";
 urlpnr : any ="https://api.railwayapi.com/v2/pnr-status/pnr";
 urlTrainStatus:any="https://api.railwayapi.com/v2/live/train";
 public trainRouteUrl:any='https://api.railwayapi.com/v2/route/train';
+public stationSuggestUrl:any='https://api.railwayapi.com/v2/suggest-station/name/mum/apikey/myapikey/';
 
 public now: Date = new Date();
 date:String;
@@ -65,4 +66,13 @@ getStatusDetails() {
 //     headers:new HttpHeaders().append('Content-Type' , 'application/json')
 // });
 // }
+
+
+search_word(term){
+  return this._http.get(this.stationSuggestUrl+'/'+term+'/apikey/'+this.key+'/', {
+     responseType : 'json',
+    headers:new HttpHeaders().append('Content-Type' , 'application/json')
+  });
+}
+
 }

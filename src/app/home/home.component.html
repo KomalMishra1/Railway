@@ -84,7 +84,8 @@ e.g. To get the train schedule for Himachal Express i.e. Train No. 14553 -- eith
                           </div>
           </div>
           </div>
-          </form>
+        </form>
+
         </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
@@ -139,6 +140,15 @@ Enter names of two stations and hit Get Trains Between button. Select the right 
                                       </div>
           </div>
           </div>
+          </form>
+          <form class="example-form">
+            <mat-form-field class="example-full-width">
+  <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
           </form>
         </div>
           <div class="modal-footer">
