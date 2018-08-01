@@ -8,7 +8,7 @@
   <div class="card mt-5 ml-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;">
     <div class="card-body text-center" style="color:#333366;"><h4>Pnr Status</h4></div>
     <div class="card-body text-center" style="color:#ff5f5f;">
-      <img src="../assets/images/map-spot1.png" class="text-center">
+      <img src="../assets/images/map-spot1.png" class="text-c enter">
       <hr>
       <p>PNR is short name for 'Passenger Name Record'. It is a record in the database of Indian Railways computer reservation system (IR-CRS) against which journey details for a passenger, or a group of passengers are saved Copy.
       </p>
@@ -106,6 +106,7 @@ e.g. To get the train schedule for Himachal Express i.e. Train No. 14553 -- eith
 Enter names of two stations and hit Get Trains Between button. Select the right search result and navigate to the page that lists trains between stations
     </p>
 
+
 <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" style="color:#333366; border-color:#333366;" data-toggle="modal" data-target="#exampleModalCenter3"><strong>Check</strong></button>
 
@@ -134,22 +135,35 @@ Enter names of two stations and hit Get Trains Between button. Select the right 
                           </div>
                             <div class="form-group">
                             <label for="validationTooltip01">Enter Destination Station</label>
-                            <input type="text" formControlName="destinationStation" class="form-control" id="validationTooltip01" placeholder="Enter destination Station" required>
+                            <input type="text" formControlName="destinationStation" class="form-control" id="validationTooltip01" placeholder="Enter destination Station" (keyup)="filter($event)"  required>
+                            <!-- <ul *ngIf="destinationStation.value">
+                              <li *ngFor="let value of filterList">{{value.station.name}} {{value.station.code}}</li>
+                            </ul> -->
+
                             <span *ngIf="!trainBetweenStationForm.get('destinationStation').valid && trainBetweenStationForm.get('destinationStation').touched && trainBetweenStationForm.get('destinationStation').dirty && trainBetweenStationForm.get('destinationStation').touched"
                                        class="help-block"> Please Enter valid Destination</span>
                                       </div>
+
+
+
+        `
+
+
+
           </div>
           </div>
           </form>
-          <form class="example-form">
-            <mat-form-field class="example-full-width">
-  <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </form>
+          <div class="input-field col s12">
+            <input id="country" type="text" class="validate filter-input" [(ngModel)]=query (keyup)=filter()>
+                       <label for="country">Country</label>
+                     </div>
+                     <div class="suggestions" *ngIf="filteredList.length > 0">
+                         <ul *ngFor="let item of filteredList" >
+                             <li >
+                                 <a (click)="select(item)">{{item}}</a>
+                             </li>
+                         </ul>
+                     </div>
         </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
