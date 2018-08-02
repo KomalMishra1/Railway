@@ -7,7 +7,6 @@ import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {ROUTING} from './app.routing';
@@ -15,6 +14,8 @@ import { PnrComponent } from './pnr/pnr.component';
 import {AppService} from './app.service';
 import { TrainStatusComponent } from './train-status/train-status.component';
 import { TrainscheduleComponent } from './trainschedule/trainschedule.component';
+import { AutoComponent } from './auto/auto.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TrainscheduleComponent } from './trainschedule/trainschedule.component'
     HomeComponent,
     PnrComponent,
     TrainStatusComponent,
-    TrainscheduleComponent
+    TrainscheduleComponent,
+    AutoComponent
   ],
   imports: [
     BrowserModule,

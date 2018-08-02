@@ -33,33 +33,31 @@ trainForm : FormGroup=new FormGroup({
       train: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)])
 });
 
+
+myControl: FormControl = new FormControl();
+
+options = [
+  'One',
+  'Two',
+  'Three'
+];
+
+
+
 trainDetails:any;
 trainStation: any;
 trainToBeChecked:any;
 event:any;
 trainNo : any;
 sourceArr : any;
-// filterList:any;
+ filterList:any;
 destinationArr : any;
 showlist:boolean =false;
 public date: Date = new Date();
 
 
-public query = '';
-   public countries = [ "Albania","Andorra","Armenia","Austria","Azerbaijan","Belarus",
-                       "Belgium","Bosnia & Herzegovina","Bulgaria","Croatia","Cyprus",
-                       "Czech Republic","Denmark","Estonia","Finland","France","Georgia",
-                       "Germany","Greece","Hungary","Iceland","Ireland","Italy","Kosovo",
-                       "Latvia","Liechtenstein","Lithuania","Luxembourg","Macedonia","Malta",
-                       "Moldova","Monaco","Montenegro","Netherlands","Norway","Poland",
-                       "Portugal","Romania","Russia","San Marino","Serbia","Slovakia","Slovenia",
-                       "Spain","Sweden","Switzerland","Turkey","Ukraine","United Kingdom","Vatican City"];
-   public filteredList = [];
-   public elementRef;
+  constructor(private _router : Router , private _appService : AppService) {
 
-
-  constructor(private _router : Router , private _appService : AppService , myElement: ElementRef) {
-     this.elementRef = myElement;
   // this._appService.getStationCode()
   // .subscribe(
   //   data => {console.log(data);
@@ -80,11 +78,13 @@ public query = '';
  }
 
   ngOnInit() {
+   //  this.filteredOptions = this.myControl.valueChanges
+   // .pipe(
+   //   startWith(''),
+   //   map(val => this.filter(val))
+   // );
   }
 
-ngOnChanges(){
-  console.log(this.trainSpotform.value.trainNumber);
-}
 
 
 
@@ -228,18 +228,46 @@ SpotTrainStatus(){
 // }
 
 
-filter() {
-    if (this.query !== ""){
-        this.filteredList = this.countries.filter(function(el){
-            return el.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
-        }.bind(this));
-    }else{
-        this.filteredList = [];
-    }
+// filter() {
+//     if (this.query !== ""){
+//         this.filteredList = this.countries.filter(function(el){
+//             return el.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
+//         }.bind(this));
+//     }else{
+//         this.filteredList = [];
+//     }
+// }
+
+// select(item){
+//     this.query = item;
+//     this.filteredList = [];
+// }
+get(event){
+console.log(event.target.value);
+if(event.target.value.length > 5){
+this.showlist=true;
+this._appService.checkForStations(event.target.value).
+subscribe(
+  data =>{
+
+    this.filterList=data;
+    this.sourceArr=this.filterList.stations;
+    console.log(this.sourceArr);
+  },
+    err=>console.log(err));
+    this.showlist=true;
+    console.log(this.showlist);
+
+}
+else {
+  this.showlist=false;
 }
 
-select(item){
-    this.query = item;
-    this.filteredList = [];
+}
+
+selectStation(station) {
+  console.log(station);
+  this.showlist=false;
+  this.trainBetweenStationForm.sourceStation.value=station;
 }
 }
