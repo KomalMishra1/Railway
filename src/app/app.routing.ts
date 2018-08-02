@@ -10,7 +10,7 @@ import {AutoComponent} from './auto/auto.component';
 export const AppRoutes : Routes =[
   {path : '' , component : HomeComponent},
    {path: 'pnr/:id', component: PnrComponent},
-   {path: 'trainstatus/:id', component: TrainStatusComponent},
+   {path: 'trainstatus', component: TrainStatusComponent},
    {path: 'trainschedule/:id', component: TrainscheduleComponent},
 {path: 'auto', component: AutoComponent}
 

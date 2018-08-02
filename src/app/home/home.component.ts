@@ -26,7 +26,7 @@ trainSpotform : FormGroup=new FormGroup({
 
 trainBetweenStationForm : FormGroup=new FormGroup({
       sourceStation: new FormControl(null ,  Validators.required),
-        destinationStation: new FormControl(null , Validators.required)
+       destinationStation: new FormControl(null , Validators.required)
 });
 
 trainForm : FormGroup=new FormGroup({
@@ -34,25 +34,18 @@ trainForm : FormGroup=new FormGroup({
 });
 
 
-myControl: FormControl = new FormControl();
-
-options = [
-  'One',
-  'Two',
-  'Three'
-];
-
-
-
 trainDetails:any;
 trainStation: any;
+route:any;
 trainToBeChecked:any;
 event:any;
 trainNo : any;
 sourceArr : any;
  filterList:any;
 destinationArr : any;
-showlist:boolean =false;
+showsourcelist:boolean =false;
+showdestinationlist:boolean=false;
+showRest:boolean=false;
 public date: Date = new Date();
 
 
@@ -144,6 +137,7 @@ onSubmitTrainStation(){
 enter(event) {
   if(event.target.value.length == 5)
   {
+    this.showRest=true;
     this.trainNo = event.target.value;
     console.log(parseInt(event.target.value));
     this._appService.getTrainStations(parseInt(event.target.value)).
@@ -152,20 +146,22 @@ enter(event) {
         // this.trainDetails=data;
         // console.log(this.trainDetails.route);
         //   console.log(data);
-        console.log(data);
+        // console.log(data);
         this.trainStation = data;
-        console.log(this.trainStation.route)
+        this.route=this.trainStation.route;
+        console.log(this.route)
       },
        error=>console.log(error));
+       console.log(this.showRest);
      }
   // console.log("value is",typeof parseInt(event.target.value));
   // console.log("length is" , event.target.value.length);
 }
 
-checkForCode(event) {
-  console.log(event.target.value);
-
-}
+// checkForCode(event) {
+//   console.log(event.target.value);
+//
+// }
 
 
 pushData(event) {
@@ -242,10 +238,10 @@ SpotTrainStatus(){
 //     this.query = item;
 //     this.filteredList = [];
 // }
-get(event){
+getSourceList(event){
 console.log(event.target.value);
 if(event.target.value.length > 5){
-this.showlist=true;
+// this.showsourcelist=true;
 this._appService.checkForStations(event.target.value).
 subscribe(
   data =>{
@@ -255,19 +251,55 @@ subscribe(
     console.log(this.sourceArr);
   },
     err=>console.log(err));
-    this.showlist=true;
-    console.log(this.showlist);
+    this.showsourcelist=true;
+    console.log(this.showsourcelist);
 
 }
 else {
-  this.showlist=false;
+  this.showsourcelist=false;
+  console.log(this.showsourcelist)
 }
 
 }
 
-selectStation(station) {
+getDestinationList(event) {
+  console.log(event.target.value);
+  if(event.target.value.length > 5){
+  // this.showdestinationlist=true;
+  this._appService.checkForStations(event.target.value).
+  subscribe(
+    data =>{
+
+      this.filterList=data;
+      this.destinationArr=this.filterList.stations;
+      console.log(this.destinationArr);
+    },
+      err=>console.log(err));
+      this.showdestinationlist=true;
+      console.log(this.showdestinationlist);
+
+  }
+  else {
+    this.showdestinationlist=false;
+    console.log(this.showdestinationlist)
+  }
+}
+
+
+selectSourceStation(station) {
+  this.trainBetweenStationForm.patchValue({"sourceStation" : station});
   console.log(station);
-  this.showlist=false;
-  this.trainBetweenStationForm.sourceStation.value=station;
+  this.showsourcelist=false;
+
+    // this.trainBetweenStationForm.value.sourceStation=station;
+      console.log(this.trainBetweenStationForm.value);
+}
+
+
+selectDestinationStation(station) {
+  this.trainBetweenStationForm.patchValue({"destinationStation" : station});
+  console.log(station);
+  this.showdestinationlist=false;
+      console.log(this.trainBetweenStationForm.value);
 }
 }
