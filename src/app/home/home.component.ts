@@ -7,7 +7,7 @@ import {AppService} from '../app.service';
 import { debounceTime } from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -51,11 +51,19 @@ destinationStationCode:any;
 public date: Date = new Date();
 
 
-  constructor(private _router : Router , private _appService : AppService) {
+  constructor(private _router : Router , private _appService : AppService, private spinner: NgxSpinnerService) {
  }
 
   ngOnInit() {
-  }
+    /** spinner starts on init */
+this.spinner.show();
+
+setTimeout(() => {
+    /** spinner ends after 5 seconds */
+    this.spinner.hide();
+}, 5000);
+}
+
 
 
 
@@ -65,6 +73,7 @@ public date: Date = new Date();
           console.log('invalid'); return;
 
         }
+
             console.log(this.pnrform.value.pnrNumber);
             console.log(JSON.stringify( typeof this.pnrform.value.pnrNumber));
             var num : number = parseInt(this.pnrform.value.pnrNumber);
@@ -73,12 +82,20 @@ public date: Date = new Date();
     // .subscribe(
     //   data=> {  console.log(data);},
     //    err=>console.log(err));
+
             this._router.navigate(['/pnr',num] );
 
 
       }
 
       sendTrain() {
+        this.spinner.show();
+
+        setTimeout(() => {
+            /** spinner ends after 5 seconds */
+            this.spinner.hide();
+            console.log("spinner");
+        }, 5000);
         if(!(this.trainForm.valid)) {
           console.log('invalid'); return;
 

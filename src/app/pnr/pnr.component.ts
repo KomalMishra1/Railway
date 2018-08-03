@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AppService} from '../app.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-pnr',
@@ -13,7 +15,13 @@ pnrDetails :any;
 showMessage:boolean = false;
 // pnrNo : number ;
 
-  constructor(private route: ActivatedRoute ,  private _appService : AppService) {
+  constructor(private route: ActivatedRoute ,  private _appService : AppService , private spinner: NgxSpinnerService) {
+    this.spinner.show();
+
+    setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+    }, 2000);
     this.route.params.subscribe(params => {
       // console.log("value of pnrNo." , typeof (JSON.stringify(params['id'])));
       // console.log(parseInt(s));
@@ -38,6 +46,7 @@ showMessage:boolean = false;
   }
 
   ngOnInit() {
+
   }
 
 

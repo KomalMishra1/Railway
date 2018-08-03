@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AppService} from '../app.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-trainschedule',
@@ -14,8 +15,13 @@ count : number=0;
 showFull : boolean = false;
 
 
-  constructor(private route: ActivatedRoute ,  private _appService : AppService) {
+  constructor(private route: ActivatedRoute ,  private _appService : AppService , private spinner: NgxSpinnerService) {
+    this.spinner.show();
 
+  setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+  }, 5000);
     this.route.params.subscribe(params => {
         var trainNo : number = parseInt(params['id']);
         console.log(typeof trainNo);
@@ -37,6 +43,7 @@ showFull : boolean = false;
 
 
   ngOnInit() {
+
   }
 
 getDays(days){

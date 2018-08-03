@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AppService} from '../app.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-train-status',
@@ -16,7 +17,7 @@ public nextStoppage :any;
 public showNextStoppageStation:boolean = false;
 public routeArr : any = [];
 
-  constructor(private _router : Router , private _appService : AppService) {
+  constructor(private _router : Router , private _appService : AppService , private spinner: NgxSpinnerService) {
 
   this.station =  this._appService.station;
   // this.trainStatusDetails=this._appService.trainStatusDetails;
@@ -40,8 +41,13 @@ subscribe(
   }
 
   ngOnInit() {
+    this.spinner.show();
 
-  }
+    setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+    }, 5000);
+}
 
   showRouteInformation(trainStatus){
     for(let value of trainStatus){
