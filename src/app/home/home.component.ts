@@ -40,42 +40,21 @@ route:any;
 trainToBeChecked:any;
 event:any;
 trainNo : any;
-sourceArr : any;
- filterList:any;
-destinationArr : any;
+sourceArr : any = [];
+filterList:any;
+destinationArr : any = [];
 showsourcelist:boolean =false;
 showdestinationlist:boolean=false;
 showRest:boolean=false;
+sourceStationCode:any;
+destinationStationCode:any;
 public date: Date = new Date();
 
 
   constructor(private _router : Router , private _appService : AppService) {
-
-  // this._appService.getStationCode()
-  // .subscribe(
-  //   data => {console.log(data);
-  //     this.sourceArr = data;
-  //     console.log("train  status" ,  this.sourceArr);
-  //   },
-  //   err=>console.log(err));
-  // this.searchTerm.valueChanges
-  //   .pipe(debounceTime(400))
-  //   .subscribe(data => {
-  //     console.log(data);
-  //       this._appService.search_word(data).subscribe(   data => {console.log(data);
-  //           this.searchResult = data;
-  //           console.log("train  status" ,  this.searchResult);
-  //         },
-  //         err=>console.log(err));
-  //       });
  }
 
   ngOnInit() {
-   //  this.filteredOptions = this.myControl.valueChanges
-   // .pipe(
-   //   startWith(''),
-   //   map(val => this.filter(val))
-   // );
   }
 
 
@@ -238,68 +217,74 @@ SpotTrainStatus(){
 //     this.query = item;
 //     this.filteredList = [];
 // }
+
 getSourceList(event){
-console.log(event.target.value);
-if(event.target.value.length > 5){
-// this.showsourcelist=true;
-this._appService.checkForStations(event.target.value).
-subscribe(
-  data =>{
-
-    this.filterList=data;
-    this.sourceArr=this.filterList.stations;
-    console.log(this.sourceArr);
-  },
-    err=>console.log(err));
-    this.showsourcelist=true;
-    console.log(this.showsourcelist);
-
-}
-else {
-  this.showsourcelist=false;
-  console.log(this.showsourcelist)
-}
-
+    console.log(event.target.value);
+    if(event.target.value.length > 5){
+        // this.showsourcelist=true;
+        console.log("inside if");
+        this._appService.checkForStations(event.target.value).
+          subscribe(
+                data =>{
+                  console.log('komal',data);
+                  console.log('sourceArr', this.sourceArr)
+                  this.filterList=data;
+                  this.sourceArr=this.filterList.stations;
+                  console.log(this.sourceArr);
+                },
+                  err=>console.log(err)
+              );
+          this.showsourcelist=true;
+          console.log(this.showsourcelist);
+    }
+    else {
+      this.showsourcelist=false;
+      console.log(this.showsourcelist)
+    }
 }
 
 getDestinationList(event) {
-  console.log(event.target.value);
+
   if(event.target.value.length > 5){
   // this.showdestinationlist=true;
   this._appService.checkForStations(event.target.value).
   subscribe(
     data =>{
-
       this.filterList=data;
       this.destinationArr=this.filterList.stations;
-      console.log(this.destinationArr);
+      console.log('a',this.destinationArr);
     },
       err=>console.log(err));
       this.showdestinationlist=true;
-      console.log(this.showdestinationlist);
-
+      console.log('b',this.showdestinationlist);
   }
   else {
     this.showdestinationlist=false;
     console.log(this.showdestinationlist)
   }
+
 }
 
 
-selectSourceStation(station) {
-  this.trainBetweenStationForm.patchValue({"sourceStation" : station});
-  console.log(station);
+selectSourceStation(stationname , stationcode) {
+  this.trainBetweenStationForm.patchValue({"sourceStation" : stationname});
+  console.log(stationcode);
   this.showsourcelist=false;
-
-    // this.trainBetweenStationForm.value.sourceStation=station;
+  this.sourceStationCode=stationcode;
       console.log(this.trainBetweenStationForm.value);
 }
 
 
-selectDestinationStation(station) {
-  this.trainBetweenStationForm.patchValue({"destinationStation" : station});
-  console.log(station);
+selectDestinationStation(stationname , stationcode) {
+  this.trainBetweenStationForm.patchValue({"destinationStation" : stationname});
+  console.log(stationcode);
+  this.destinationStationCode=stationcode;
+  // this._appService.sendToDestination(stationcode);
   this.showdestinationlist=false;
       console.log(this.trainBetweenStationForm.value);
+}
+searchTrainBetweenStations() {
+  // this._appService.sendStationValues(this.sourceStationCode , this.destinationStationCode);
+  this._router.navigate(['/betweenstations' , this.sourceStationCode , this.destinationStationCode]);
 }
 }

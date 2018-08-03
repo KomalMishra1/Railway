@@ -14,7 +14,8 @@ import { PnrComponent } from './pnr/pnr.component';
 import {AppService} from './app.service';
 import { TrainStatusComponent } from './train-status/train-status.component';
 import { TrainscheduleComponent } from './trainschedule/trainschedule.component';
-import { AutoComponent } from './auto/auto.component';
+import { BetweenstationsComponent } from './betweenstations/betweenstations.component';
+
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { AutoComponent } from './auto/auto.component';
     PnrComponent,
     TrainStatusComponent,
     TrainscheduleComponent,
-    AutoComponent
+    BetweenstationsComponent
   ],
   imports: [
     BrowserModule,

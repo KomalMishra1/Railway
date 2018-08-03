@@ -1,14 +1,14 @@
-<nav class="navbar text-center" style="background-color:#f0f0f0;">
-  <span class="navbar-brand mb-0 h1 text-center"> <img src ="../assets/images/train-on-railroad.png">Welcome To Indian Railways</span>
+<nav class="navbar text-center" style="background-color:#f0f0f0;height:4rem;">
+  <span class="navbar-brand mb-0 h1 text-center"> <img src ="../assets/images/train-on-railroad.png"><h4 class="text-center">Welcome To Indian Railways</h4></span>
 </nav>
 <div class = "container-fluid">
 <div class="row">
-    <div class="card mt-5 ml-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;">
+    <div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:100px;">
       <div class="card-body text-center" style="color:#333366;"><h4>Pnr Status</h4></div>
       <div class="card-body text-center" style="color:#ff5f5f;">
         <img src="../assets/images/map-spot1.png" class="text-c enter">
         <hr>
-        <p>PNR is short name for 'Passenger Name Record'. It is a record in the database of Indian Railways computer reservation system (IR-CRS) against which journey details for a passenger, or a group of passengers are saved Copy.
+        <p><strong>PNR is short name for 'Passenger Name Record'.Please enter a valid 10 digit PNR number</strong>
         </p>
 
   <!-- Button trigger modal -->
@@ -48,14 +48,13 @@
 
         </div>
   </div>
-  <div class="card mt-5 ml-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;">
+  <div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:100px;">
   <div class="card-body text-center" style="color:#333366;"><h4>Train Schedule</h4></div>
   <div class="card-body text-center" style="color:#ff5f5f;">
     <img src="../assets/images/clock-circular-outline.png" class="text-center">
     <hr>
-    <!-- <p>Please enter few characters of Train Name OR few digits of Train Number.
-e.g. To get the train schedule for Himachal Express i.e. Train No. 14553 -- either enter himachal or 145
-    </p> -->
+     <p><strong>Please enter few characters of Train Name OR few digits of Train Number.</strong>
+</p>
 
 <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" style="color:#333366; border-color:#333366;" data-toggle="modal" data-target="#exampleModalCenter4"><strong>Check</strong></button>
@@ -95,13 +94,13 @@ e.g. To get the train schedule for Himachal Express i.e. Train No. 14553 -- eith
 
     </div>
 </div>
-<div class="card mt-5 ml-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;">
+<div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:100px;">
   <div class="card-body text-center" style="color:#333366;"><h4>Train Between Stations</h4></div>
   <div class="card-body text-center" style="color:#ff5f5f;">
     <img src="../assets/images/distance-to-travel-between-two-points.png" class="text-center">
     <hr>
     <p>
-Enter names of two stations and hit Get Trains Between button. Select the right search result and navigate to the page that lists trains between stations
+<strong>Enter names of two stations source and destination and hit Get Trains Between button.</strong>
     </p>
 
 
@@ -121,26 +120,25 @@ Enter names of two stations and hit Get Trains Between button. Select the right 
           <div class="modal-body">
             <form [formGroup]="trainBetweenStationForm" novalidate>
             <div class="form-group" class="example-full-width" autocomplete="off">
-                <input type="text" class="form-control" id="validationTooltip01" placeholder="Train No." formControlName="sourceStation"  (keyup)="getSourceList($event);"required>
+                <input type="text" class="form-control" id="validationTooltip01" placeholder="Enter Source Station" formControlName="sourceStation"  (keyup)="getSourceList($event);"required>
               <!-- <input type="text" placeholder="Pick one" aria-label="Number" class="autocomplete" (keyup)="get($event);" required> -->
 
-              <ul class="list-group text-center " *ngIf="sourceArr.length > 0 && showsourcelist">
-                <a href="#" class="list-group-item active" *ngFor="let list of sourceArr" (click)="selectSourceStation(list.name);">{{list.name}}</a>
+              <ul class="list-group text-center " *ngIf="showsourcelist">
+                <a href="#" class="list-group-item active" *ngFor="let list of sourceArr" (click)="selectSourceStation(list.name , list.code);">{{list.name}}</a>
             </ul>
             </div>
 
-            <div class="form-group" class="example-full-width mt-5" autocomplete="off">
-                <input type="text" class="form-control" id="validationTooltip02" placeholder="Train No." formControlName="destinationStation"  (keyup)="getDestinationList($event);"required>
-
-          <ul class="list-group text-center " *ngIf="destinationArr.length > 0 && showdestinationlist">
-            <a href="#" class="list-group-item active" *ngFor="let list of destinationArr" (click)="selectDestinationStation(list.name);">{{list.name}}</a>
-        </ul>
-        </div>
+          <div class="form-group" class="example-full-width mt-5" autocomplete="off">
+            <input type="text" class="form-control" id="validationTooltip02" placeholder="Enter Destination Station" formControlName="destinationStation" (keyup)="getDestinationList($event);" required>
+            <ul class="list-group text-center" *ngIf="showdestinationlist">
+              <a href="#" class="list-group-item active" *ngFor="let list of destinationArr" (click)="selectDestinationStation(list.name , list.code);">{{list.name}}</a>
+            </ul>
+          </div>
             </form>
         </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Search Trains</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="searchTrainBetweenStations();">Search Trains</button>
           </div>
         </div>
       </div>
@@ -148,14 +146,12 @@ Enter names of two stations and hit Get Trains Between button. Select the right 
 
     </div>
 </div>
-<div class="card mt-5 ml-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;">
+<div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:150px;">
   <div class="card-body text-center" style="color:#333366;"><h4>Spot Your Train</h4></div>
   <div class="card-body text-center" style="color:#ff5f5f;">
     <img src="../assets/images/magnifier.png" class="text-center">
     <hr>
-    <p>Enter valid five digit train number in the form above and hit 'Get Train Running Status' button.
-A new web page will be opened with more detailed information about your queried train number.
-
+    <p><strong>Enter valid five digit train number in the form above and hit 'Get Train Running Status' button.</strong>
     </p>
 
 <!-- Button trigger modal -->
@@ -214,5 +210,33 @@ A new web page will be opened with more detailed information about your queried 
     </div>
   </div>
 </div>
+<marquee direction="right"><h3  class="mt-5" style="color:#f9e75e;">20 Must Read Facts About Indian Railways</h3></marquee>
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+<div class="col-md-8 text-center mt-5 ml-5 mb-5" style="color:#f0f0f0;">
+  <div class="row">
+<h5>1. The first train in India ran on 16 th April 1853 from Bombay to Thane.</h5>
+<h5>2. The mascot of Indian Railways is Bholu - the guard elephant.</h5>
+<h5>3. The full track length of Indian Railways can circle the equator one-and-a-half times.</h5>
+<h5>4. The first railroad was constructed by two Indians – Jaganath Shunkerseth and Jamsetjee Jeejeebhoy.</h5>
+<h5>5. Metupalayam Ooty Nilgiri Passenger train is the slowest train in India. It runs at a speed of 10 kmph.</h5>
+<h5>6. The total distance covered by Indian Railways daily equals three and a half times the distance to the moon.</h5>
+<h5>7. With over 1.6 million employees, Indian Railways is the world's 9th largest employer.</h5>
+<h5>8. Indian Railways is a monopoly. It is owned by the government.</h5>
+<h5>9. Howrah-Amritsar Express has 115 stops, the record maximum for an Express train.
+</h5>
+<h5>10. Indian Railways carry more than 25 million passengers every day, more than the entire population of Australia.</h5>
+<h5>11. In 1986, Indian Railways started its first computerized reservation in New Delhi.</h5>
+<h5>12. The New Delhi Main Station, having the world's largest route relay interlocking system, has a place in the Guinness Book of Records.</h5>
+
+</div>
+</div>
+<div class="col-md-2">
+</div>
+</div>
+</div>
+<div class="fixed-bottom text-center" style="color:#ff5f5f;background-color:#f0f0f0;height:3rem;"><strong>Welcome to Indian Railways</strong></div>
 </div>
 </div>

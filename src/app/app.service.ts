@@ -14,11 +14,13 @@ urlpnr : any ="https://api.railwayapi.com/v2/pnr-status/pnr";
 urlTrainStatus:any="https://api.railwayapi.com/v2/live/train";
 public trainRouteUrl:any='https://api.railwayapi.com/v2/route/train';
 public stationSuggestUrl:any='https://api.railwayapi.com/v2/suggest-station/name';
-
+public trainBetweenStationUrl : any = 'https://api.railwayapi.com/v2/between/source';
 public now: Date = new Date();
 date:String;
 public trainNo:any;
-public station : any
+public station : any;
+// public sourceStationCode : any;
+// public destinationStationCode : any;
 public journeyDate : Date = new Date();
 
 constructor(private _http : HttpClient) {}
@@ -74,5 +76,18 @@ checkForStations(term){
     headers:new HttpHeaders().append('Content-Type' , 'application/json')
   });
 }
+
+getTrainBetweenStations(sourceStation , destinationStation) {
+    this.date = this.journeyDate.getDate()+"-"+(this.journeyDate.getMonth()+1)+"-"+this.journeyDate.getFullYear();
+  return this._http.get(this.trainBetweenStationUrl+'/'+sourceStation+'/dest/'+destinationStation+'/date/'+this.date+'/apikey/'+this.key+'/', {
+     responseType : 'json',
+    headers:new HttpHeaders().append('Content-Type' , 'application/json')
+  });
+}
+// sendStationValues(sourcestationcode , destinationstationcode) {
+//   this.sourceStationCode = sourcestationcode;
+//   this.destinationStationCode = destinationstationcode;
+// }
+
 
 }

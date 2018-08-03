@@ -10,6 +10,7 @@ import {AppService} from '../app.service';
 export class PnrComponent implements OnInit {
 
 pnrDetails :any;
+showMessage:boolean = false;
 // pnrNo : number ;
 
   constructor(private route: ActivatedRoute ,  private _appService : AppService) {
@@ -22,6 +23,12 @@ pnrDetails :any;
 .subscribe(
   data=> {
     this.pnrDetails=data;
+    if(this.pnrDetails.response_code == 220 || this.pnrDetails.response_code == 221)  {
+      this.showMessage=true;
+    }
+    else {
+      this.showMessage=false;
+    }
       console.log(data);},
    err=>console.log(err));
 

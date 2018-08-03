@@ -1,0 +1,59 @@
+<nav class="navbar text-center" style="background-color:#f0f0f0;">
+<span class="navbar-brand mb-0 h1 text-center"> <img src ="../assets/images/train-on-railroad.png">Welcome To Indian Railways</span>
+</nav>
+<div class = "container-fluid">
+<div class="row">
+  <div class="col-md-2 col-lg-2">
+  </div>
+  <div class="col-md-8 col-lg-8">
+<div class="card mt-5 ml-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+  <div class="card-body text-center" style="color:#333366;"><h5>Train Between Stations : {{this.sourceStation}} {{this.destinationStation}}</h5></div>
+  <div class="card-body text-center" style="color:#ff5f5f;">
+    <img src="../assets/images/distance-to-travel-between-two-points.png" class="text-center">
+    <hr>
+    <h4>Total {{trainBetweenStationObject.total}}</h4>
+    <div class="col-md-12" style="color:black;">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Train No and Name <br> Running Days</th>
+            <th scope="col">Arr/Dep</th>
+            <th scope="col">Travel Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let details of trainBetweenStationObject.trains; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{details.number}} {{details.name}} <br>
+
+             <!-- <div class="row">
+              <div class="col-12">
+               <div  *ngIf = "showFull; then showDays else showDaily"> </div>
+                <ng-template #showDays> -->
+                <div class="row text-center ml-5">
+                    Day :
+                   <div *ngFor = "let days of details.days">
+                      <div  class="ml-2 text-center"  *ngIf="days.runs == 'Y'" >
+                 {{days.code}} ,
+                 </div>
+                </div>
+              </div>
+                <!-- </ng-template>
+                <ng-template #showDaily>Daily</ng-template>
+              </div>
+            </div>  -->
+          </td>
+            <td>{{details.from_station.name}} - {{details.dest_arrival_time}} <br> {{details.to_station.name}} -  {{details.src_departure_time}}</td>
+            <td>{{details.distance}} {{details.travel_time}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+</div>
+</div>
+<div class="col-md-2 col-lg-2">
+</div>
+</div>
+</div>
