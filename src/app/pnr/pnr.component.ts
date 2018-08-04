@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AppService} from '../app.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-pnr',
@@ -15,7 +15,7 @@ pnrDetails :any;
 showMessage:boolean = false;
 // pnrNo : number ;
 
-  constructor(private route: ActivatedRoute ,  private _appService : AppService , private spinner: NgxSpinnerService) {
+  constructor(private route: ActivatedRoute ,  private _appService : AppService , private spinner: NgxSpinnerService ,private _router : Router) {
     this.spinner.show();
 
     setTimeout(() => {
@@ -49,7 +49,9 @@ showMessage:boolean = false;
 
   }
 
-
+goBack(){
+  this._router.navigate(['/']);
+}
 
 
 }

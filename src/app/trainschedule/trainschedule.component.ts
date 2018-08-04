@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AppService} from '../app.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-trainschedule',
@@ -13,9 +14,9 @@ trainScheduledDetails : any;
 runningDays : any=[];
 count : number=0;
 showFull : boolean = false;
+showMessage:boolean=false;
 
-
-  constructor(private route: ActivatedRoute ,  private _appService : AppService , private spinner: NgxSpinnerService) {
+  constructor(private route: ActivatedRoute ,  private _appService : AppService , private spinner: NgxSpinnerService , private _router : Router) {
     this.spinner.show();
 
   setTimeout(() => {
@@ -33,6 +34,12 @@ showFull : boolean = false;
      this.runningDays = this.trainScheduledDetails.train.days;
     console.log(this.runningDays);
       this.getDays(this.runningDays);
+      if(this.trainScheduledDetails.response_code != 200)  {
+        this.showMessage=true;
+      }
+      else {
+        this.showMessage=false;
+      }
       // console.log(data);
     },
    err=>console.log(err));
@@ -64,6 +71,11 @@ else {
   this.showFull = true;
   console.log("inside else");
 }
+}
+
+
+goBack(){
+  this._router.navigate(['/']);
 }
 
 }

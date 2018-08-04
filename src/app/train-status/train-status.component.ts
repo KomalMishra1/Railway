@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AppService} from '../app.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+
 @Component({
   selector: 'app-train-status',
   templateUrl: './train-status.component.html',
@@ -16,6 +17,7 @@ public routeObj : any;
 public nextStoppage :any;
 public showNextStoppageStation:boolean = false;
 public routeArr : any = [];
+public showMessage:boolean=false;
 
   constructor(private _router : Router , private _appService : AppService , private spinner: NgxSpinnerService) {
 
@@ -28,6 +30,12 @@ subscribe(
     this.trainStatusDetails = data;
       this.showRouteInformation(this.trainStatusDetails.route);
     console.log("train  status" ,  this.trainStatusDetails.route);
+    if(this.trainStatusDetails.response_code != 200)  {
+      this.showMessage=true;
+    }
+    else {
+      this.showMessage=false;
+    }
   },
   err=>console.log(err));
   // console.log("route is " , this.trainStatusDetails.route);
@@ -71,6 +79,11 @@ subscribe(
         }
       }
     }
+  }
+
+
+  goBack(){
+    this._router.navigate(['/']);
   }
 
 }

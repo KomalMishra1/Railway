@@ -141,7 +141,7 @@
         </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="searchTrainBetweenStations();">Search Trains</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="searchTrainBetweenStations();" [disabled]="trainBetweenStationForm.invalid">Search Trains</button>
           </div>
         </div>
       </div>
@@ -213,12 +213,12 @@
     </div>
   </div>
 </div>
-<marquee direction="right"><h3  class="mt-5" style="color:#f9e75e;">20 Must Read Facts About Indian Railways</h3></marquee>
+<marquee direction="left"><h3  class="mt-5" style="color:#f9e75e;">20 Must Read Facts About Indian Railways</h3></marquee>
 <div class="col-md-12">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-1">
     </div>
-<div class="col-md-8 text-center mt-5 ml-5 mb-5" style="color:#f0f0f0;">
+<div class="col-md-8 mt-5 mb-5" style="color:#f0f0f0;">
   <div class="row">
 <h5>1. The first train in India ran on 16 th April 1853 from Bombay to Thane.</h5>
 <h5>2. The mascot of Indian Railways is Bholu - the guard elephant.</h5>
@@ -233,13 +233,22 @@
 <h5>10. Indian Railways carry more than 25 million passengers every day, more than the entire population of Australia.</h5>
 <h5>11. In 1986, Indian Railways started its first computerized reservation in New Delhi.</h5>
 <h5>12. The New Delhi Main Station, having the world's largest route relay interlocking system, has a place in the Guinness Book of Records.</h5>
+<h5>13. With a length of 1366.33 metres, Gorakhpur in Uttar Pradesh is the longest platform in the world.</h5>
+<h5>14. Indian Railways is one of the world's largest railway networks, with 115,000 kms of tracks and a route of 65,000 kms.</h5>
+<h5>15.Venkatanarasimharajuvaripeta is the longest station name</h5>
+<h5>16. Guwahati-Trivandrum Express is the most unreliable train in the country. The average delay in the journey is 10-12 hours.</h5>
+<h5>17. The world’s highest railway bridge is being built over Chenab. It will dwarf the Eiffel Tower.</h5>
+<h5>18. There are 7,500 railway stations in India.</h5>
+<h5>19. For more than 50 years, there were no toilets on Indian Railways.</h5>
+<h5>20. A mobile app system to track train schedules has been introduced by Indian Railways in 2014.</h5>
 
 </div>
 </div>
-<div class="col-md-2">
+<div class="col-md-3">
 </div>
 </div>
 </div>
-<div class="fixed-bottom text-center" style="color:#ff5f5f;background-color:#f0f0f0;height:3rem;"><strong>Welcome to Indian Railways</strong></div>
+<div class="col-md-12 mb-5" style="color:#f9e75e;text-align:right;font-family:Comic Sans MS;">Thanks to my parents and friends for bringing out the best in me</div>
+<div class="fixed-bottom text-center" style="color:#ff5f5f;background-color:#f0f0f0;height:3rem;"><div class="mt-3"><strong>Indian Railways Welcomes You</strong></div></div>
 </div>
 </div>

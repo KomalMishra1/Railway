@@ -17,11 +17,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class HomeComponent implements OnInit {
 
   pnrform : FormGroup=new FormGroup({
-        pnrNumber: new FormControl(null ,  [Validators.required,Validators.minLength(10) , Validators.maxLength(10)])
+        pnrNumber: new FormControl(null ,  Validators.compose([Validators.required,Validators.minLength(10) , Validators.maxLength(10) , Validators.pattern('^[1-9][0-9]{9}$')]))
 });
 
 trainSpotform : FormGroup=new FormGroup({
-      trainNumber: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)])
+      trainNumber: new FormControl(null ,  Validators.compose([Validators.required,Validators.minLength(5) , Validators.maxLength(5) , Validators.pattern('^[1-9][0-9]{4}$')]))
 });
 
 trainBetweenStationForm : FormGroup=new FormGroup({
@@ -30,7 +30,7 @@ trainBetweenStationForm : FormGroup=new FormGroup({
 });
 
 trainForm : FormGroup=new FormGroup({
-      train: new FormControl(null ,  [Validators.required,Validators.minLength(5) , Validators.maxLength(5)])
+      train: new FormControl(null ,  Validators.compose([Validators.required,Validators.minLength(5) , Validators.maxLength(5) , Validators.pattern('^[1-9][0-9]{4}$')]))
 });
 
 
@@ -61,7 +61,7 @@ this.spinner.show();
 setTimeout(() => {
     /** spinner ends after 5 seconds */
     this.spinner.hide();
-}, 5000);
+}, 2000);
 }
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AppService} from '../app.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-betweenstations',
@@ -16,7 +17,9 @@ public destinationStation : any;
 public runningDays :any;
 showFull : boolean =false;
 count : number;
-  constructor(private route: ActivatedRoute , private _appService : AppService) {
+showMessage:boolean=false;
+
+  constructor(private route: ActivatedRoute , private _appService : AppService , private _router : Router) {
     this.route.params.subscribe(params => {
          this.sourceStation = params['id1'],
         this.destinationStation = params['id2'];
@@ -27,6 +30,12 @@ count : number;
                 console.log(this.trainBetweenStationObject);
                 this.runningDays = this.trainBetweenStationObject.trains.days;
                console.log("running days are " , this.runningDays);
+               if(this.trainBetweenStationObject.response_code != 200)  {
+                 this.showMessage=true;
+               }
+               else {
+                 this.showMessage=false;
+               }
                 },
                err=>console.log(err));
              });
@@ -65,5 +74,7 @@ count : number;
   //   console.log("inside else");
   // }
   // }
-
+  goBack(){
+    this._router.navigate(['/']);
+  }
 }

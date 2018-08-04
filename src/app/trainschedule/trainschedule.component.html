@@ -1,6 +1,7 @@
 <ngx-spinner></ngx-spinner>
-<nav class="navbar text-center" style="background-color:#f0f0f0;">
-<span class="navbar-brand mb-0 h1 text-center"> <img src ="../assets/images/train-on-railroad.png">Welcome To Indian Railways</span>
+<nav class="navbar text-center" style="background-color:#f0f0f0;height:5rem;">
+  <img src ="../assets/images/railway.png">
+  <div class=" h1 text-center"> <h4 class="text-center"><strong>Welcome To Indian Railways</strong></h4></div>
 </nav>
 <div class = "container-fluid">
 <div class="row">
@@ -8,6 +9,7 @@
   </div>
   <div class="col-md-8 col-lg-8">
 <div class="card mt-5 ml-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+  <div class="card-body float-right">  <img src ="../assets/images/delete.png" style="margin-left:27rem;" (click)="goBack();"></div>
   <div class="card-body text-center" style="color:#333366;"><h5>Train Name : {{trainScheduledDetails.train.name}} {{trainScheduledDetails.train.number}} Running Schedule</h5></div>
   <div class="card-body text-center" style="color:#ff5f5f;">
     <img src="../assets/images/magnifier.png" class="text-center">
@@ -48,6 +50,9 @@
         </tbody>
       </table>
     </div>
+    <div class="message mt-5" *ngIf="showMessage">
+      <h4>Sorry Some Error Occurred</h4>
+  </div>
 </div>
 </div>
 </div>
