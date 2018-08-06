@@ -5,7 +5,7 @@
 </nav>
 <div class = "container-fluid">
 <div class="row">
-    <div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:80px;">
+    <div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:120px;">
       <div class="card-body text-center" style="color:#333366;"><h4>Pnr Status</h4></div>
       <div class="card-body text-center" style="color:#ff5f5f;">
         <img src="../assets/images/map-spot1.png" class="text-c enter">
@@ -50,7 +50,7 @@
 
         </div>
   </div>
-  <div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:80px;">
+  <div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:120px;">
   <div class="card-body text-center" style="color:#333366;"><h4>Train Schedule</h4></div>
   <div class="card-body text-center" style="color:#ff5f5f;">
     <img src="../assets/images/clock-circular-outline.png" class="text-center">
@@ -97,7 +97,7 @@
 
     </div>
 </div>
-<div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:80px;">
+<div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:100px;">
   <div class="card-body text-center" style="color:#333366;"><h4>Train Between Stations</h4></div>
   <div class="card-body text-center" style="color:#ff5f5f;">
     <img src="../assets/images/distance-to-travel-between-two-points.png" class="text-center">
@@ -127,14 +127,14 @@
               <!-- <input type="text" placeholder="Pick one" aria-label="Number" class="autocomplete" (keyup)="get($event);" required> -->
 
               <ul class="list-group text-center " *ngIf="showsourcelist">
-                <a href="#" class="list-group-item active" *ngFor="let list of sourceArr" (click)="selectSourceStation(list.name , list.code);">{{list.name}}</a>
+                <a href="javascript:void()" class="list-group-item active" *ngFor="let list of sourceArr" (click)="selectSourceStation(list.name , list.code);">{{list.name}}</a>
             </ul>
             </div>
 
           <div class="form-group" class="example-full-width mt-5" autocomplete="off">
             <input type="text" class="form-control" id="validationTooltip02" placeholder="Enter Destination Station" formControlName="destinationStation" (keyup)="getDestinationList($event);" required>
             <ul class="list-group text-center" *ngIf="showdestinationlist">
-              <a href="#" class="list-group-item active" *ngFor="let list of destinationArr" (click)="selectDestinationStation(list.name , list.code);">{{list.name}}</a>
+              <a href="javascript:void()" class="list-group-item active" *ngFor="let list of destinationArr" (click)="selectDestinationStation(list.name , list.code);">{{list.name}}</a>
             </ul>
           </div>
             </form>
@@ -149,7 +149,7 @@
 
     </div>
 </div>
-<div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-left:80px;">
+<div class="card mt-5" style="box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);width: 15rem;margin-right:100px;margin-left:120px;">
   <div class="card-body text-center" style="color:#333366;"><h4>Spot Your Train</h4></div>
   <div class="card-body text-center" style="color:#ff5f5f;">
     <img src="../assets/images/magnifier.png" class="text-center">
@@ -218,7 +218,7 @@
   <div class="row">
     <div class="col-md-1">
     </div>
-<div class="col-md-8 mt-5 mb-5" style="color:#f0f0f0;">
+<div class="col-md-10 mt-5 mb-5" style="color:#f0f0f0;">
   <div class="row">
 <h5>1. The first train in India ran on 16 th April 1853 from Bombay to Thane.</h5>
 <h5>2. The mascot of Indian Railways is Bholu - the guard elephant.</h5>
@@ -241,14 +241,17 @@
 <h5>18. There are 7,500 railway stations in India.</h5>
 <h5>19. For more than 50 years, there were no toilets on Indian Railways.</h5>
 <h5>20. A mobile app system to track train schedules has been introduced by Indian Railways in 2014.</h5>
+<hr>
+</div>
+</div>
+<div class="col-md-1">
+</div>
+<hr>
+</div>
+</div>
+<div class="col-md-12 mb-5" style="color:#333366;text-align:right;font-family:Comic Sans MS;background-color:#f0f0f0;height:4rem;">Thanks to my parents and friends for bringing out the best in me
+<p>@CopyRight Designed by Komal Mishra</div>
 
-</div>
-</div>
-<div class="col-md-3">
-</div>
-</div>
-</div>
-<div class="col-md-12 mb-5" style="color:#f9e75e;text-align:right;font-family:Comic Sans MS;">Thanks to my parents and friends for bringing out the best in me</div>
 <div class="fixed-bottom text-center" style="color:#ff5f5f;background-color:#f0f0f0;height:3rem;"><div class="mt-3"><strong>Indian Railways Welcomes You</strong></div></div>
 </div>
 </div>

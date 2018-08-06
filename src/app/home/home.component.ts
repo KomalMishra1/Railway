@@ -237,7 +237,7 @@ SpotTrainStatus(){
 
 getSourceList(event){
     console.log(event.target.value);
-    if(event.target.value.length > 5){
+    if(event.target.value.length > 3){
         // this.showsourcelist=true;
         console.log("inside if");
         this._appService.checkForStations(event.target.value).
@@ -262,7 +262,7 @@ getSourceList(event){
 
 getDestinationList(event) {
 
-  if(event.target.value.length > 5){
+  if(event.target.value.length > 3){
   // this.showdestinationlist=true;
   this._appService.checkForStations(event.target.value).
   subscribe(
