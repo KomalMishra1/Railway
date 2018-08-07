@@ -51,83 +51,68 @@ destinationStationCode:any;
 public date: Date = new Date();
 
 
-  constructor(private _router : Router , private _appService : AppService, private spinner: NgxSpinnerService) {
- }
+constructor(private _router : Router , private _appService : AppService, private spinner: NgxSpinnerService) {}
 
-  ngOnInit() {
+ngOnInit() {
     /** spinner starts on init */
-this.spinner.show();
+  this.spinner.show();
+  setTimeout(() => {
+  /** spinner ends after 5 seconds */
+  this.spinner.hide();
+  }, 2000);
+}
 
-setTimeout(() => {
-    /** spinner ends after 5 seconds */
-    this.spinner.hide();
-}, 2000);
+sendPnr() {
+  if(!(this.pnrform.valid)) {
+  console.log('invalid'); return;
+  }
+  console.log(this.pnrform.value.pnrNumber);
+  console.log(JSON.stringify( typeof this.pnrform.value.pnrNumber));
+  var num : number = parseInt(this.pnrform.value.pnrNumber);
+  this._router.navigate(['/pnr',num] );
+  }
+
+sendTrain() {
+  this.spinner.show();
+  setTimeout(() => {
+  /** spinner ends after 5 seconds */
+  this.spinner.hide();
+  console.log("spinner");
+  }, 5000);
+  if(!(this.trainForm.valid)) {
+    console.log('invalid'); return;
+    }
+  console.log(this.trainForm.value.train);
+    console.log(JSON.stringify( typeof this.trainForm.value.train));
+    var num : number = parseInt(this.trainForm.value.train);
+    console.log(num);
+    this._router.navigate(['/trainschedule',num] );
+    }
+
+
+searchTrainBetweenStation() {
+  if(!(this.trainBetweenStationForm.valid)) {
+    console.log('invalid'); return;
+    }
+  console.log(this.trainBetweenStationForm.value);
 }
 
 
 
-
-
-      sendPnr() {
-        if(!(this.pnrform.valid)) {
-          console.log('invalid'); return;
-
-        }
-
-            console.log(this.pnrform.value.pnrNumber);
-            console.log(JSON.stringify( typeof this.pnrform.value.pnrNumber));
-            var num : number = parseInt(this.pnrform.value.pnrNumber);
-            // console.log(typeof num);
-    //         this._appService.sendPnr(JSON.stringify(num))
-    // .subscribe(
-    //   data=> {  console.log(data);},
-    //    err=>console.log(err));
-
-            this._router.navigate(['/pnr',num] );
-
-
-      }
-
-      sendTrain() {
-        this.spinner.show();
-
-        setTimeout(() => {
-            /** spinner ends after 5 seconds */
-            this.spinner.hide();
-            console.log("spinner");
-        }, 5000);
-        if(!(this.trainForm.valid)) {
-          console.log('invalid'); return;
-
-        }
-            console.log(this.trainForm.value.train);
-            console.log(JSON.stringify( typeof this.trainForm.value.train));
-            var num : number = parseInt(this.trainForm.value.train);
-                this._router.navigate(['/trainschedule',num] );
-      }
-
-      searchTrainBetweenStation() {
-        if(!(this.trainBetweenStationForm.valid)) {
-          console.log('invalid'); return;
-
-        }
-            console.log(this.trainBetweenStationForm.value);
-      }
-
-
-
-      onSubmit() {
-    console.log(this.pnrform)
-    this.pnrform.controls['pnrNumber'].markAsTouched()
+onSubmit() {
+  console.log(this.pnrform)
+  this.pnrform.controls['pnrNumber'].markAsTouched()
 }
+
 onSubmitTrain() {
-console.log(this.trainForm)
-this.trainForm.controls['train'].markAsTouched()
+  console.log(this.trainForm)
+  this.trainForm.controls['train'].markAsTouched()
 }
+
 onSubmitTrainStation(){
   console.log(this.trainBetweenStationForm)
   this.trainBetweenStationForm.controls['sourceStation'].markAsTouched(),
-    this.trainBetweenStationForm.controls['destinationStation'].markAsTouched()
+  this.trainBetweenStationForm.controls['destinationStation'].markAsTouched()
 }
 
 enter(event) {
@@ -163,86 +148,45 @@ enter(event) {
 pushData(event) {
   this.event=event
   console.log(event);
+}
+
+pushDate(event) {
+  if(event == "Tomorrow") {
+      var date1 : Date =new Date();
+      date1.setDate(date1.getDate() + 1 );
+      this.date.setDate(date1.getDate());
+      console.log("tomorrow selected" , this.date);
+      return date1;
     }
-
-    pushDate(event) {
-      if(event == "Tomorrow") {
-
-        var date1 : Date =new Date();
-        date1.setDate(date1.getDate() + 1 );
-
-        this.date.setDate(date1.getDate());
-        console.log("tomorrow selected" , this.date);
-        return date1;
-      }
-      else if(event == "Yesterday") {
-        var date2 : Date =new Date();
-          date2.setDate( date2.getDate() - 1 );
-          this.date.setDate(date2.getDate());
-        console.log("yesterday selected" , this.date);
-        return date2;
-      }
-      else{
-        var date3 : Date =new Date();
-        this.date.setDate(date3.getDate());
-      console.log(this.date);
-      return this.date;
-    }
-
-    }
+  else if(event == "Yesterday") {
+      var date2 : Date =new Date();
+      date2.setDate( date2.getDate() - 1 );
+      this.date.setDate(date2.getDate());
+      console.log("yesterday selected" , this.date);
+      return date2;
+  }
+  else{
+    var date3 : Date =new Date();
+    this.date.setDate(date3.getDate());
+    console.log(this.date);
+    return this.date;
+  }
+}
 
 SpotTrainStatus(){
-    this._appService.spotTrainStatus(this.trainNo , this.event , this.date);
+  this._appService.spotTrainStatus(this.trainNo , this.event , this.date);
   this._router.navigate(['/trainstatus']);
 }
 
-// filter(event){
-//   console.log(event.target.value);
-//   if(event.target.value.length > 5) {
-//
-// this._appService.checkForStations(event.target.value).
-// subscribe(
-//   data =>{
-//
-//     this.filterList=data;
-//     this.sourceArr=this.filterList.stations;
-//     console.log(this.sourceArr);
-//   },
-//     err=>console.log(err));
-//     this.showlist=true;
-//     console.log(this.showlist);
-//
-// }
-// else {
-//   this.showlist=false;
-//
-// }
-// }
-
-
-// filter() {
-//     if (this.query !== ""){
-//         this.filteredList = this.countries.filter(function(el){
-//             return el.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
-//         }.bind(this));
-//     }else{
-//         this.filteredList = [];
-//     }
-// }
-
-// select(item){
-//     this.query = item;
-//     this.filteredList = [];
-// }
 
 getSourceList(event){
-    console.log(event.target.value);
-    if(event.target.value.length > 3){
-        // this.showsourcelist=true;
-        console.log("inside if");
-        this._appService.checkForStations(event.target.value).
-          subscribe(
-                data =>{
+  console.log(event.target.value);
+  if(event.target.value.length > 3){
+    // this.showsourcelist=true;
+      console.log("inside if");
+      this._appService.checkForStations(event.target.value).
+      subscribe(
+          data =>{
                   console.log('komal',data);
                   console.log('sourceArr', this.sourceArr)
                   this.filterList=data;
@@ -288,7 +232,7 @@ selectSourceStation(stationname , stationcode) {
   console.log(stationcode);
   this.showsourcelist=false;
   this.sourceStationCode=stationcode;
-      console.log(this.trainBetweenStationForm.value);
+  console.log(this.trainBetweenStationForm.value);
 }
 
 
@@ -298,8 +242,10 @@ selectDestinationStation(stationname , stationcode) {
   this.destinationStationCode=stationcode;
   // this._appService.sendToDestination(stationcode);
   this.showdestinationlist=false;
-      console.log(this.trainBetweenStationForm.value);
+  console.log(this.trainBetweenStationForm.value);
 }
+
+
 searchTrainBetweenStations() {
   // this._appService.sendStationValues(this.sourceStationCode , this.destinationStationCode);
   this._router.navigate(['/betweenstations' , this.sourceStationCode , this.destinationStationCode]);
