@@ -109,6 +109,11 @@ onSubmitTrain() {
   this.trainForm.controls['train'].markAsTouched()
 }
 
+onSubmitTrainNo() {
+  console.log(this.trainSpotform)
+  this.trainSpotform.controls['trainNumber'].markAsTouched()
+}
+
 onSubmitTrainStation(){
   console.log(this.trainBetweenStationForm)
   this.trainBetweenStationForm.controls['sourceStation'].markAsTouched(),
