@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 
 export class AppService {
 
-key:any = "poxqzh6nqn";
+key:any = "5g0qgx5jo8";
 urlpnr : any ="https://api.railwayapi.com/v2/pnr-status/pnr";
 urlTrainStatus:any="https://api.railwayapi.com/v2/live/train";
 public trainRouteUrl:any='https://api.railwayapi.com/v2/route/train';
